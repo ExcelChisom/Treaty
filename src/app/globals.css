@@ -43,6 +43,7 @@
   --shadow-lg: 0 10px 32px 0 rgba(0, 0, 0, 0.10), 0 4px 8px -4px rgba(0, 0, 0, 0.06);
   --shadow-glow-green: 0 0 24px rgba(34, 197, 94, 0.35);
   --shadow-glow-purple: 0 0 24px rgba(109, 40, 217, 0.35);
+  --shadow-glow-orange: 0 0 24px rgba(249, 115, 22, 0.35);
 
   /* ── Border Radius ── */
   --radius-sm: 8px;
@@ -162,6 +163,15 @@ body {
   .delay-300 { animation-delay: 300ms; }
   .delay-400 { animation-delay: 400ms; }
   .delay-500 { animation-delay: 500ms; }
+
+  /* ── Scale Utilities ── */
+  .active\:scale-98:active { transform: scale(0.98); }
+
+  /* ── iOS Safe Area ── */
+  /* pb-safe adds bottom padding equal to the device's home indicator height */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
 
   /* ── Mobile Shell ── */
   .treaty-shell {
