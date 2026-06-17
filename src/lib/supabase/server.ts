@@ -4,7 +4,7 @@
  * Server-side Supabase client factory using @supabase/ssr.
  * Use this in:
  *   - Server Components (async components)
- *   - Route Handlers (app/api/**/route.ts)
+ *   - Route Handlers (app/api/[...]/route.ts)
  *   - Server Actions
  *
  * NEVER import this in Client Components ('use client' files).
