@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -40,22 +41,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body>
-        {/*
-         * Treaty Mobile Shell
-         * ─────────────────────────────────────────────────────────
-         * max-w-md (448px) — strict mobile-first constraint.
-         * The outer wrapper fills the full viewport with a slate
-         * background so the shell "floats" on wider screens.
-         * ─────────────────────────────────────────────────────────
-         */}
-        <div className="min-h-svh bg-slate-100 flex justify-center">
-          <div className="treaty-shell w-full">
-            {children}
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body>
+          {/*
+           * Treaty Mobile Shell
+           * ─────────────────────────────────────────────────────────
+           * max-w-md (448px) — strict mobile-first constraint.
+           * The outer wrapper fills the full viewport with a slate
+           * background so the shell "floats" on wider screens.
+           * ─────────────────────────────────────────────────────────
+           */}
+          <div className="min-h-svh bg-slate-100 flex justify-center">
+            <div className="treaty-shell w-full">{children}</div>
           </div>
-        </div>
-      </body>
-    </html>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
