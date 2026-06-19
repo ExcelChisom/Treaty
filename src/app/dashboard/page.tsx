@@ -14,12 +14,12 @@ export default async function DashboardPage() {
     "Carlin!";
 
   return (
-    <main className="max-w-5xl mx-auto w-full px-4 md:px-8 pt-6 pb-24 flex flex-col gap-6">
+    <main className="max-w-lg mx-auto w-full px-4 pt-6 pb-24 flex flex-col gap-6">
       
       {/* 1. Header */}
       <section className="animate-fade-in-up">
-        <h1 className="text-white text-3xl font-bold">Hey {nickname}! 👋</h1>
-        <p className="text-gray-400 mt-1">Here's your campus overview</p>
+        <h1 className="text-white text-2xl font-bold">Hey {nickname}! 👋</h1>
+        <p className="text-gray-400 text-sm mt-1">Here's your campus overview</p>
       </section>
 
       {/* 2. Wallet Card */}
@@ -56,28 +56,28 @@ export default async function DashboardPage() {
         <h2 className="text-white font-semibold mb-3">Quick Actions</h2>
         <div className="grid grid-cols-4 gap-3">
           <button className="flex flex-col items-center gap-2 group">
-            <div className="w-14 h-14 rounded-2xl bg-[#7C4DFF]/20 flex items-center justify-center text-[#7C4DFF] group-active:scale-95 transition-transform">
+            <div className="w-16 h-16 rounded-2xl bg-[#7C4DFF]/20 flex items-center justify-center text-[#7C4DFF] group-active:scale-95 transition-transform">
               <Calendar size={24} />
             </div>
             <span className="text-xs text-gray-400 font-medium">Schedule</span>
           </button>
           
           <button className="flex flex-col items-center gap-2 group">
-            <div className="w-14 h-14 rounded-2xl bg-[#FDC400]/20 flex items-center justify-center text-[#FDC400] group-active:scale-95 transition-transform">
+            <div className="w-16 h-16 rounded-2xl bg-[#FDC400]/20 flex items-center justify-center text-[#FDC400] group-active:scale-95 transition-transform">
               <MapPin size={24} />
             </div>
             <span className="text-xs text-gray-400 font-medium">Hotspots</span>
           </button>
           
           <button className="flex flex-col items-center gap-2 group">
-            <div className="w-14 h-14 rounded-2xl bg-[#FF6B68]/20 flex items-center justify-center text-[#FF6B68] group-active:scale-95 transition-transform">
+            <div className="w-16 h-16 rounded-2xl bg-[#FF6B68]/20 flex items-center justify-center text-[#FF6B68] group-active:scale-95 transition-transform">
               <Receipt size={24} />
             </div>
             <span className="text-xs text-gray-400 font-medium">Expenses</span>
           </button>
           
           <button className="flex flex-col items-center gap-2 group">
-            <div className="w-14 h-14 rounded-2xl bg-[#14B8A6]/20 flex items-center justify-center text-[#14B8A6] group-active:scale-95 transition-transform">
+            <div className="w-16 h-16 rounded-2xl bg-[#14B8A6]/20 flex items-center justify-center text-[#14B8A6] group-active:scale-95 transition-transform">
               <Lightbulb size={24} />
             </div>
             <span className="text-xs text-gray-400 font-medium">Tips</span>
@@ -87,8 +87,8 @@ export default async function DashboardPage() {
 
       {/* 5. Shreddy's Smart Tip */}
       <section className="animate-fade-in-up delay-200 mt-2">
-        <div className="bg-[#1E293B] border border-[#00C853]/30 rounded-3xl p-4 flex gap-4 items-center">
-          <div className="w-12 h-12 rounded-full bg-[#00C853]/20 flex items-center justify-center text-2xl flex-shrink-0">
+        <div className="bg-[#1E293B] border border-[#00C853]/30 rounded-3xl p-4 flex flex-row items-center gap-4">
+          <div className="w-10 h-10 rounded-full bg-[#00C853]/20 flex items-center justify-center text-xl shrink-0">
             🦖
           </div>
           <div>
