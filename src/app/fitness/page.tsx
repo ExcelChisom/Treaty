@@ -30,21 +30,8 @@ export default async function FitnessPage() {
   const isSubscribed = userId ? await hasAccess(userId, "fitness") : false;
 
   return (
-    <main className="max-w-7xl mx-auto w-full px-4 md:px-8 pt-6 pb-24 flex flex-col gap-6">
-      {/* ── Header ── */}
-      <header
-        className="flex items-center justify-between p-6 rounded-3xl bg-[#1E293B] border border-[#334155]"
-      >
-        <div className="animate-fade-in-up">
-          <div className="flex items-center gap-2 mb-1">
-            <span className="text-2xl" aria-hidden="true">💪</span>
-            <h1 className="text-white font-black text-xl tracking-tight">Fitness</h1>
-          </div>
-          <p className="text-white/40 text-xs font-medium">
-            Weight · Workouts · Steps
-          </p>
-        </div>
-      </header>
+    <main className="max-w-5xl mx-auto w-full px-4 md:px-8 pt-6 pb-24 flex flex-col gap-6">
+
 
       {isSubscribed ? (
         <FitnessDataSection userId={userId!} />

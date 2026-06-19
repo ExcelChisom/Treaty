@@ -107,69 +107,9 @@ export default async function DashboardPage() {
   const stats = buildStats(5000); // Budget pulled from user settings in Block 5
 
   return (
-    <main className="max-w-7xl mx-auto w-full px-4 md:px-8 pt-6 pb-24 flex flex-col gap-6">
+    <main className="max-w-5xl mx-auto w-full px-4 md:px-8 pt-6 pb-24 flex flex-col gap-6">
 
-      {/* ── App Header ── */}
-      <header
-        className="flex items-center justify-between p-6 rounded-3xl bg-[#1E293B] border border-[#334155]"
-      >
-        <div className="animate-fade-in-up">
-          {/* Treaty wordmark */}
-          <div className="flex items-center gap-2 mb-4">
-            <div
-              className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
-              style={{
-                background:
-                  "linear-gradient(135deg, var(--treaty-green), var(--treaty-green-dark))",
-              }}
-            >
-              <svg width="14" height="14" viewBox="0 0 44 44" fill="none" aria-hidden="true">
-                <path d="M8 12H36M22 12V36" stroke="white" strokeWidth="5" strokeLinecap="round" />
-                <path
-                  d="M14 26L19 31L30 20"
-                  stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-            <span className="text-white font-black text-lg tracking-tight">Treaty</span>
-            <span
-              className="text-[10px] font-bold px-2 py-0.5 rounded-full ml-1"
-              style={{
-                background: "rgba(34,197,94,0.2)",
-                color: "var(--treaty-green)",
-              }}
-            >
-              BETA
-            </span>
-          </div>
-          <p className="text-white/50 text-xs font-semibold uppercase tracking-widest">
-            Dashboard
-          </p>
-        </div>
 
-        {/* Notification bell */}
-        <button
-          id="dashboard-notifications"
-          type="button"
-          className="w-9 h-9 rounded-xl flex items-center justify-center transition-all active:scale-90"
-          style={{
-            background: "rgba(255,255,255,0.08)",
-            border: "1px solid rgba(255,255,255,0.1)",
-          }}
-          aria-label="Notifications"
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path
-              d="M12 2C8.13 2 5 5.13 5 9V15L3 17V18H21V17L19 15V9C19 5.13 15.87 2 12 2Z"
-              stroke="white" strokeWidth="1.7" strokeLinejoin="round"
-            />
-            <path
-              d="M9.5 21C9.5 22.38 10.62 23.5 12 23.5C13.38 23.5 14.5 22.38 14.5 21"
-              stroke="white" strokeWidth="1.5"
-            />
-          </svg>
-        </button>
-      </header>
 
       {/* ── Body ── */}
       <div className="flex flex-col gap-6">
@@ -191,12 +131,11 @@ export default async function DashboardPage() {
               >
                 <span className="text-lg leading-none" aria-hidden="true">{stat.unit}</span>
                 <span
-                  className="text-base font-black leading-none"
-                  style={{ color: stat.color }}
+                  className="text-white font-semibold text-lg leading-none"
                 >
                   {stat.value}
                 </span>
-                <span className="text-[10px] text-text-muted font-semibold text-center leading-tight">
+                <span className="text-gray-400 text-sm text-center leading-tight">
                   {stat.label}
                 </span>
               </div>
