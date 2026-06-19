@@ -45,7 +45,7 @@ export default async function FoodPage() {
     <main className="max-w-7xl mx-auto w-full px-4 md:px-8 pt-6 pb-24 flex flex-col gap-6">
       {/* ── Header ── */}
       <header
-        className="flex items-center justify-between p-6 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10"
+        className="flex items-center justify-between p-6 rounded-3xl bg-[#1E293B] border border-[#334155]"
       >
         <div className="animate-fade-in-up">
           <div className="flex items-center gap-2 mb-1">
@@ -85,7 +85,7 @@ export default async function FoodPage() {
             </p>
           </div>
           <div
-            className="w-full rounded-3xl p-5 bg-white/5 backdrop-blur-md border border-white/10"
+            className="w-full rounded-3xl p-5 bg-[#1E293B] border border-[#334155]"
           >
             <p className="text-xs font-bold text-text-muted mb-3 uppercase tracking-widest">
               What you unlock

@@ -276,7 +276,7 @@ export default function FoodClient({
         <>
           <div
             role="presentation"
-            className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
+            className="fixed inset-0 z-40 bg-[#0F172A]/95"
             onClick={() => setShowLog(false)}
           />
           <div

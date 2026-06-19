@@ -59,7 +59,7 @@ export default async function FinancePage() {
 
       {/* ── Header ── */}
       <header
-        className="flex items-center justify-between p-6 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10"
+        className="flex items-center justify-between p-6 rounded-3xl bg-[#1E293B] border border-[#334155]"
       >
         <div className="animate-fade-in-up">
           <div className="flex items-center gap-2 mb-1">

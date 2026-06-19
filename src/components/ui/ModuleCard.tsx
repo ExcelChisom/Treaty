@@ -29,7 +29,7 @@ export default function ModuleCard({
     <Link
       href={href}
       id={`module-card-${title.toLowerCase().replace(/\s/g, "-")}`}
-      className="relative flex flex-col overflow-hidden rounded-3xl transition-all duration-200 active:scale-95 group bg-white/5 backdrop-blur-md border border-white/10"
+      className="relative flex flex-col overflow-hidden rounded-3xl transition-all duration-200 active:scale-95 group bg-[#1E293B] border border-[#334155]"
       style={{
         minHeight: "148px",
       }}
@@ -105,7 +105,7 @@ export default function ModuleCard({
       {/* ── Lock overlay (isLocked) ── */}
       {isLocked && (
         <div
-          className="absolute inset-0 rounded-3xl flex flex-col items-center justify-center gap-2 transition-opacity duration-200 bg-[#0F172A]/80 backdrop-blur-md"
+          className="absolute inset-0 rounded-3xl flex flex-col items-center justify-center gap-2 transition-opacity duration-200 bg-[#0F172A]/95"
           aria-hidden="true"
         >
           {/* Lock icon */}

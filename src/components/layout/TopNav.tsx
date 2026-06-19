@@ -7,7 +7,7 @@ export default function TopNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="hidden md:flex sticky top-0 z-50 w-full bg-[#0F172A]/80 backdrop-blur-md border-b border-white/10 items-center justify-between px-8 py-4">
+    <nav className="hidden md:flex sticky top-0 z-50 w-full bg-[#0F172A] border-b border-[#334155] items-center justify-between px-8 py-4">
       {/* Left: Logo */}
       <Link href="/dashboard" className="flex items-center gap-2 transition-all active:scale-95">
         <div

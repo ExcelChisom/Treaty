@@ -111,7 +111,7 @@ export default async function DashboardPage() {
 
       {/* ── App Header ── */}
       <header
-        className="flex items-center justify-between p-6 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10"
+        className="flex items-center justify-between p-6 rounded-3xl bg-[#1E293B] border border-[#334155]"
       >
         <div className="animate-fade-in-up">
           {/* Treaty wordmark */}
@@ -187,7 +187,7 @@ export default async function DashboardPage() {
               <div
                 key={stat.id}
                 id={`stat-${stat.id}`}
-                className="flex flex-col items-center gap-1 rounded-2xl py-3 px-2 bg-white/5 backdrop-blur-md border border-white/10"
+                className="flex flex-col items-center gap-1 rounded-2xl py-3 px-2 bg-[#1E293B] border border-[#334155]"
               >
                 <span className="text-lg leading-none" aria-hidden="true">{stat.unit}</span>
                 <span
@@ -213,7 +213,7 @@ export default async function DashboardPage() {
             </span>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {MODULE_DEFS.map((mod) => (
               <ModuleCard
                 key={mod.key}

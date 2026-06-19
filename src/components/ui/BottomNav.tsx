@@ -75,12 +75,11 @@ export default function BottomNav() {
 
   return (
     <nav
-      className="md:hidden fixed bottom-0 left-0 w-full z-50 border-t border-white/10"
+      className="md:hidden fixed bottom-0 left-0 w-full z-50"
       aria-label="Main navigation"
       style={{
-        background: "rgba(15, 23, 42, 0.95)",
-        backdropFilter: "blur(16px)",
-        WebkitBackdropFilter: "blur(16px)",
+        background: "#0F172A",
+        borderTop: "1px solid #334155",
         boxShadow: "0 -4px 24px rgba(0,0,0,0.2)",
       }}
     >
