@@ -8,65 +8,12 @@
  */
 
 import { auth, currentUser } from "@clerk/nextjs/server";
-import { createServiceClient } from "@/lib/supabase/server";
+import { getActiveModules } from "@/lib/subscriptions";
 import ShreddyGreeting from "@/components/shreddy/ShreddyGreeting";
 import ModuleCard from "@/components/ui/ModuleCard";
 import BottomNav from "@/components/ui/BottomNav";
 
-// ── Types ──────────────────────────────────────────────────────────────────
-
-interface Subscription {
-  plan_type: string;
-  status: string;
-  expires_at: string;
-}
-
-// ── Subscription check ─────────────────────────────────────────────────────
-
-/**
- * Queries the subscriptions table for active, non-expired plans.
- *
- * NOTE ON CLERK IDs:
- *   Clerk user IDs are strings ("user_2abc...") but the subscriptions.user_id
- *   column is UUID. Until the Paystack webhook is built (Block 5), no records
- *   will match, so all premium modules default to locked — which is correct.
- *   The query is wrapped in try/catch to handle any type mismatch gracefully.
- */
-async function getActiveModules(userId: string): Promise<Set<string>> {
-  const active = new Set<string>(["finance"]); // Finance is always free
-
-  try {
-    const supabase = await createServiceClient();
-
-    const { data } = await supabase
-      .from("subscriptions")
-      .select("plan_type, status, expires_at")
-      .eq("user_id", userId)
-      .eq("status", "active");
-
-    const now = new Date().toISOString();
-
-    // Safely iterate — data may be null or empty array
-    (data ?? []).forEach((sub: Subscription) => {
-      if ((sub.expires_at ?? "") > now) {
-        const plan = sub.plan_type?.toLowerCase() ?? "";
-        // Bundle unlocks everything; individual plans unlock their module
-        if (plan === "bundle") {
-          active.add("food");
-          active.add("fitness");
-          active.add("schedule");
-        } else if (["food", "fitness", "schedule"].includes(plan)) {
-          active.add(plan);
-        }
-      }
-    });
-  } catch (err) {
-    // Graceful fallback — Clerk UUID mismatch or Supabase error
-    console.warn("[dashboard] Subscription check failed:", err);
-  }
-
-  return active;
-}
+// ── Subscription check: now delegated to shared lib/subscriptions helper ─────
 
 // ── Mock stat helpers (replaced with live queries in Block 5) ──────────────
 

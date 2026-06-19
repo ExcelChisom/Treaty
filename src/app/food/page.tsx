@@ -1,35 +1,131 @@
-import Link from "next/link";
+import { auth } from "@clerk/nextjs/server";
+import { createServiceClient } from "@/lib/supabase/server";
+import { hasAccess } from "@/lib/subscriptions";
+import FoodClient from "./_components/FoodClient";
+import UpgradeButton from "@/components/ui/UpgradeButton";
+import BottomNav from "@/components/ui/BottomNav";
 
-export default function FoodPage() {
+const CALORIE_TARGET = 2000;
+
+async function fetchFoodData(userId: string) {
+  const supabase = await createServiceClient();
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  const [foodsResult, logsResult] = await Promise.all([
+    supabase
+      .from("foods")
+      .select("id, name, vendor, calories, protein_g, carbs_g, fat_g, price_naira")
+      .eq("is_active", true)
+      .order("vendor")
+      .order("name"),
+    supabase
+      .from("meal_logs")
+      .select("id, name, meal_type, calories, logged_at")
+      .eq("user_id", userId)
+      .gte("logged_at", today.toISOString())
+      .lt("logged_at", tomorrow.toISOString())
+      .order("logged_at", { ascending: false }),
+  ]);
+
+  const foods = foodsResult.data ?? [];
+  const logs = logsResult.data ?? [];
+  const totalCalories = logs.reduce((s, l) => s + (l.calories ?? 0), 0);
+
+  return { foods, logs, totalCalories };
+}
+
+export default async function FoodPage() {
+  const { userId } = await auth();
+  const isSubscribed = userId ? await hasAccess(userId, "food") : false;
+
   return (
-    <main className="flex flex-col min-h-svh items-center justify-center px-6 bg-slate-50">
-      <div className="flex flex-col items-center gap-4 animate-scale-in text-center">
-        <div
-          className="w-20 h-20 rounded-2xl flex items-center justify-center text-4xl"
-          style={{ background: "var(--treaty-green-glow)" }}
-        >
-          🍽️
-        </div>
-        <div>
-          <div
-            className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold mb-3"
-            style={{ background: "var(--treaty-orange-glow)", color: "var(--treaty-orange-dark)" }}
-          >
-            🔒 Premium Feature
+    <main className="flex flex-col min-h-svh pb-24">
+      {/* ── Header ── */}
+      <header
+        className="px-5 pt-12 pb-6"
+        style={{ background: "linear-gradient(160deg, #14532d 0%, #166534 100%)" }}
+      >
+        <div className="animate-fade-in-up">
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-2xl" aria-hidden="true">🍽️</span>
+            <h1 className="text-white font-black text-xl tracking-tight">Food Hub</h1>
           </div>
-          <h1 className="text-2xl font-bold text-text-primary">Campus Food Hub</h1>
-          <p className="text-text-muted text-sm mt-2 max-w-xs">
-            Access CAF 1, CAF 2, CMSS &amp; Buttery menus with calorie tracking. Unlock with a Treaty subscription.
+          <p className="text-white/40 text-xs font-medium">
+            CAF 1 · CAF 2 · CMSS · Buttery
           </p>
         </div>
-        <Link
-          href="/dashboard"
-          className="px-6 py-3 rounded-2xl font-bold text-white text-sm transition-all active:scale-95"
-          style={{ background: "linear-gradient(135deg, var(--treaty-green), var(--treaty-green-dark))" }}
-        >
-          Upgrade to Premium
-        </Link>
-      </div>
+      </header>
+
+      {isSubscribed ? (
+        // ── Active subscriber: full module ──
+        (() => {
+          // We need to fetch data — this IIFE wraps async in sync JSX
+          // Pattern: data is fetched below via a separate async wrapper
+          return null; // placeholder replaced by FoodDataLoader
+        })()
+      ) : (
+        // ── Not subscribed: locked gate ──
+        <div className="flex flex-col items-center justify-center flex-1 px-6 py-12 gap-6 animate-fade-in-up">
+          <div
+            className="w-20 h-20 rounded-3xl flex items-center justify-center text-4xl"
+            style={{ background: "rgba(34,197,94,0.1)", border: "2px solid rgba(34,197,94,0.2)" }}
+            aria-hidden="true"
+          >
+            🔒
+          </div>
+          <div className="text-center">
+            <h2 className="text-xl font-black text-text-primary mb-2">
+              Food Hub is Premium
+            </h2>
+            <p className="text-sm text-text-muted leading-relaxed max-w-xs">
+              Unlock the full Covenant University campus menu — CAF 1, CAF 2, CMSS &
+              Buttery — with calorie tracking and macro logging.
+            </p>
+          </div>
+          <div
+            className="w-full rounded-3xl p-5"
+            style={{ background: "var(--surface)", border: "1px solid var(--border-subtle)" }}
+          >
+            <p className="text-xs font-bold text-text-muted mb-3 uppercase tracking-widest">
+              What you unlock
+            </p>
+            {[
+              "🏫 Full campus vendor directory",
+              "📊 Calorie & macro tracking",
+              "🍱 Meal log with history",
+              "💡 Smart daily targets",
+            ].map((item) => (
+              <div key={item} className="flex items-center gap-2 py-2">
+                <span className="text-sm">{item}</span>
+              </div>
+            ))}
+          </div>
+          <UpgradeButton defaultPlan="food" label="Unlock Food Hub" />
+        </div>
+      )}
+
+      {/* Async data loaded separately when subscribed */}
+      {isSubscribed && <FoodDataSection userId={userId!} />}
+
+      <BottomNav />
     </main>
+  );
+}
+
+// ── Async data section (only rendered when subscribed) ─────────────────────
+async function FoodDataSection({ userId }: { userId: string }) {
+  const { foods, logs, totalCalories } = await fetchFoodData(userId);
+
+  return (
+    <FoodClient
+      foods={foods}
+      todayLogs={logs}
+      totalCalories={totalCalories}
+      calorieTarget={CALORIE_TARGET}
+    />
   );
 }
