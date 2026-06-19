@@ -11,7 +11,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { createServiceClient } from "@/lib/supabase/server";
 import FinanceClient from "./_components/FinanceClient";
-import BottomNav from "@/components/ui/BottomNav";
 
 // ── Server Data Fetch ──────────────────────────────────────────────────────
 
@@ -56,12 +55,11 @@ export default async function FinancePage() {
     : { expenses: [], total: 0 };
 
   return (
-    <main className="flex flex-col min-h-svh bg-slate-50 pb-24">
+    <main className="max-w-7xl mx-auto w-full px-4 md:px-8 pt-6 pb-24 flex flex-col gap-6">
 
       {/* ── Header ── */}
       <header
-        className="px-5 pt-12 pb-6"
-        style={{ background: "linear-gradient(160deg, #1e1b4b 0%, #312e81 100%)" }}
+        className="flex items-center justify-between p-6 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10"
       >
         <div className="animate-fade-in-up">
           <div className="flex items-center gap-2 mb-1">
@@ -80,8 +78,6 @@ export default async function FinancePage() {
         initialTotal={total}
       />
 
-      {/* ── Bottom Navigation ── */}
-      <BottomNav />
     </main>
   );
 }

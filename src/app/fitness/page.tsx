@@ -3,7 +3,6 @@ import { createServiceClient } from "@/lib/supabase/server";
 import { hasAccess } from "@/lib/subscriptions";
 import FitnessClient from "./_components/FitnessClient";
 import UpgradeButton from "@/components/ui/UpgradeButton";
-import BottomNav from "@/components/ui/BottomNav";
 
 const GOAL_WEIGHT_KG = 70; // Default — will be pulled from user profile in Block 6
 
@@ -31,11 +30,10 @@ export default async function FitnessPage() {
   const isSubscribed = userId ? await hasAccess(userId, "fitness") : false;
 
   return (
-    <main className="flex flex-col min-h-svh pb-24">
+    <main className="max-w-7xl mx-auto w-full px-4 md:px-8 pt-6 pb-24 flex flex-col gap-6">
       {/* ── Header ── */}
       <header
-        className="px-5 pt-12 pb-6"
-        style={{ background: "linear-gradient(160deg, #7c2d12 0%, #9a3412 100%)" }}
+        className="flex items-center justify-between p-6 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10"
       >
         <div className="animate-fade-in-up">
           <div className="flex items-center gap-2 mb-1">
@@ -69,8 +67,7 @@ export default async function FitnessPage() {
             </p>
           </div>
           <div
-            className="w-full rounded-3xl p-5"
-            style={{ background: "var(--surface)", border: "1px solid var(--border-subtle)" }}
+            className="w-full rounded-3xl p-5 bg-white/5 backdrop-blur-md border border-white/10"
           >
             <p className="text-xs font-bold text-text-muted mb-3 uppercase tracking-widest">
               What you unlock
@@ -90,7 +87,6 @@ export default async function FitnessPage() {
         </div>
       )}
 
-      <BottomNav />
     </main>
   );
 }

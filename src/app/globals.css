@@ -9,33 +9,35 @@
 /* ─── 3. Treaty Design System Tokens ────────────────────────────────────── */
 :root {
   /* ── Brand Colors ── */
-  --treaty-green: #22c55e;
-  --treaty-green-dark: #16a34a;
-  --treaty-green-light: #86efac;
-  --treaty-green-glow: rgba(34, 197, 94, 0.25);
+  --treaty-green: #00C853;
+  --treaty-green-dark: #00A042;
+  --treaty-green-light: #33D375;
+  --treaty-green-glow: rgba(0, 200, 83, 0.25);
 
-  --treaty-purple: #6d28d9;
-  --treaty-purple-dark: #5b21b6;
-  --treaty-purple-light: #a78bfa;
-  --treaty-purple-glow: rgba(109, 40, 217, 0.25);
+  --treaty-yellow: #FDC400;
+  --treaty-red: #FF6B68;
+  
+  --treaty-purple: #7C4DFF;
+  --treaty-purple-dark: #651FFF;
+  --treaty-purple-light: #B388FF;
+  --treaty-purple-glow: rgba(124, 77, 255, 0.25);
 
-  --treaty-orange: #f97316;
-  --treaty-orange-dark: #ea6d0a;
-  --treaty-orange-light: #fdba74;
-  --treaty-orange-glow: rgba(249, 115, 22, 0.25);
+  --treaty-teal: #14B8A6;
+  
+  --treaty-orange: #f97316; /* Keeping for compatibility if needed */
 
   /* ── Semantic Surfaces ── */
-  --background: #f8fafc;
-  --surface: #ffffff;
-  --surface-alt: #f1f5f9;
-  --border: #e2e8f0;
-  --border-subtle: #f1f5f9;
+  --background: #0F172A;
+  --surface: rgba(255, 255, 255, 0.05);
+  --surface-alt: rgba(255, 255, 255, 0.1);
+  --border: rgba(255, 255, 255, 0.1);
+  --border-subtle: rgba(255, 255, 255, 0.05);
 
   /* ── Text Scale ── */
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
-  --text-inverse: #ffffff;
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-inverse: #0f172a;
 
   /* ── Shadows ── */
   --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
@@ -63,12 +65,14 @@
   --color-treaty-green: var(--treaty-green);
   --color-treaty-green-dark: var(--treaty-green-dark);
   --color-treaty-green-light: var(--treaty-green-light);
+  --color-treaty-yellow: var(--treaty-yellow);
+  --color-treaty-red: var(--treaty-red);
   --color-treaty-purple: var(--treaty-purple);
   --color-treaty-purple-dark: var(--treaty-purple-dark);
   --color-treaty-purple-light: var(--treaty-purple-light);
+  --color-treaty-teal: var(--treaty-teal);
   --color-treaty-orange: var(--treaty-orange);
-  --color-treaty-orange-dark: var(--treaty-orange-dark);
-  --color-treaty-orange-light: var(--treaty-orange-light);
+  --color-treaty-dark: #0F172A;
   --color-surface: var(--surface);
   --color-surface-alt: var(--surface-alt);
   --color-text-primary: var(--text-primary);
@@ -173,15 +177,9 @@ body {
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 
-  /* ── Mobile Shell ── */
+  /* ── Mobile Shell (DEPRECATED) ── */
   .treaty-shell {
-    max-width: 28rem;
-    margin-inline: auto;
-    min-height: 100svh;
-    background-color: var(--background);
-    box-shadow: 0 0 80px rgba(0, 0, 0, 0.12);
-    position: relative;
-    overflow-x: hidden;
+    /* Kept empty for backwards compatibility during migration sweep */
   }
 
   /* ── Gradients ── */
@@ -208,10 +206,10 @@ body {
 
   /* ── Glassmorphism ── */
   .glass {
-    background: rgba(255, 255, 255, 0.75);
+    background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
   .glass-dark {
     background: rgba(15, 23, 42, 0.75);

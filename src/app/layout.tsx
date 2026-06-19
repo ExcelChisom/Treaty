@@ -1,6 +1,15 @@
 import type { Metadata, Viewport } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Poppins } from "next/font/google";
+import TopNav from "@/components/layout/TopNav";
+import BottomNav from "@/components/ui/BottomNav";
 import "./globals.css";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-poppins",
+});
 
 export const metadata: Metadata = {
   title: "Treaty — Student Lifestyle OS",
@@ -42,18 +51,14 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
+      <html lang="en" className={`${poppins.variable} font-poppins`} suppressHydrationWarning>
         <body>
-          {/*
-           * Treaty Mobile Shell
-           * ─────────────────────────────────────────────────────────
-           * max-w-md (448px) — strict mobile-first constraint.
-           * The outer wrapper fills the full viewport with a slate
-           * background so the shell "floats" on wider screens.
-           * ─────────────────────────────────────────────────────────
-           */}
-          <div className="min-h-svh bg-slate-100 flex justify-center">
-            <div className="treaty-shell w-full">{children}</div>
+          <div className="min-h-screen bg-[#0F172A] text-white selection:bg-treaty-green/30 pb-24 md:pb-8 flex flex-col">
+            <TopNav />
+            <div className="flex-1">
+              {children}
+            </div>
+            <BottomNav />
           </div>
         </body>
       </html>

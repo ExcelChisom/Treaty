@@ -3,7 +3,6 @@ import { createServiceClient } from "@/lib/supabase/server";
 import { hasAccess } from "@/lib/subscriptions";
 import FoodClient from "./_components/FoodClient";
 import UpgradeButton from "@/components/ui/UpgradeButton";
-import BottomNav from "@/components/ui/BottomNav";
 
 const CALORIE_TARGET = 2000;
 
@@ -43,11 +42,10 @@ export default async function FoodPage() {
   const isSubscribed = userId ? await hasAccess(userId, "food") : false;
 
   return (
-    <main className="flex flex-col min-h-svh pb-24">
+    <main className="max-w-7xl mx-auto w-full px-4 md:px-8 pt-6 pb-24 flex flex-col gap-6">
       {/* ── Header ── */}
       <header
-        className="px-5 pt-12 pb-6"
-        style={{ background: "linear-gradient(160deg, #14532d 0%, #166534 100%)" }}
+        className="flex items-center justify-between p-6 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10"
       >
         <div className="animate-fade-in-up">
           <div className="flex items-center gap-2 mb-1">
@@ -87,8 +85,7 @@ export default async function FoodPage() {
             </p>
           </div>
           <div
-            className="w-full rounded-3xl p-5"
-            style={{ background: "var(--surface)", border: "1px solid var(--border-subtle)" }}
+            className="w-full rounded-3xl p-5 bg-white/5 backdrop-blur-md border border-white/10"
           >
             <p className="text-xs font-bold text-text-muted mb-3 uppercase tracking-widest">
               What you unlock
@@ -111,7 +108,6 @@ export default async function FoodPage() {
       {/* Async data loaded separately when subscribed */}
       {isSubscribed && <FoodDataSection userId={userId!} />}
 
-      <BottomNav />
     </main>
   );
 }

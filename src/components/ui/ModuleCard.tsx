@@ -29,10 +29,8 @@ export default function ModuleCard({
     <Link
       href={href}
       id={`module-card-${title.toLowerCase().replace(/\s/g, "-")}`}
-      className="relative flex flex-col overflow-hidden rounded-3xl transition-all duration-200 active:scale-95 group"
+      className="relative flex flex-col overflow-hidden rounded-3xl transition-all duration-200 active:scale-95 group bg-white/5 backdrop-blur-md border border-white/10"
       style={{
-        background: "var(--surface)",
-        boxShadow: `var(--shadow-md), 0 0 0 1px var(--border-subtle)`,
         minHeight: "148px",
       }}
       aria-label={isLocked ? `${title} — Premium feature` : title}
@@ -107,12 +105,7 @@ export default function ModuleCard({
       {/* ── Lock overlay (isLocked) ── */}
       {isLocked && (
         <div
-          className="absolute inset-0 rounded-3xl flex flex-col items-center justify-center gap-2 transition-opacity duration-200"
-          style={{
-            background: "rgba(255,255,255,0.65)",
-            backdropFilter: "blur(4px)",
-            WebkitBackdropFilter: "blur(4px)",
-          }}
+          className="absolute inset-0 rounded-3xl flex flex-col items-center justify-center gap-2 transition-opacity duration-200 bg-[#0F172A]/80 backdrop-blur-md"
           aria-hidden="true"
         >
           {/* Lock icon */}

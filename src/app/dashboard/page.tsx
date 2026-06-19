@@ -11,7 +11,6 @@ import { auth, currentUser } from "@clerk/nextjs/server";
 import { getActiveModules } from "@/lib/subscriptions";
 import ShreddyGreeting from "@/components/shreddy/ShreddyGreeting";
 import ModuleCard from "@/components/ui/ModuleCard";
-import BottomNav from "@/components/ui/BottomNav";
 
 // ── Subscription check: now delegated to shared lib/subscriptions helper ─────
 
@@ -108,12 +107,11 @@ export default async function DashboardPage() {
   const stats = buildStats(5000); // Budget pulled from user settings in Block 5
 
   return (
-    <main className="flex flex-col min-h-svh bg-slate-50 pb-24">
+    <main className="max-w-7xl mx-auto w-full px-4 md:px-8 pt-6 pb-24 flex flex-col gap-6">
 
       {/* ── App Header ── */}
       <header
-        className="px-5 pt-12 pb-6 flex items-center justify-between"
-        style={{ background: "linear-gradient(160deg, #0f172a 0%, #1e1b4b 100%)" }}
+        className="flex items-center justify-between p-6 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10"
       >
         <div className="animate-fade-in-up">
           {/* Treaty wordmark */}
@@ -174,7 +172,7 @@ export default async function DashboardPage() {
       </header>
 
       {/* ── Body ── */}
-      <div className="flex flex-col gap-5 px-4 pt-5">
+      <div className="flex flex-col gap-6">
 
         {/* ── Shreddy Greeting ── */}
         <section aria-label="Shreddy AI Greeting" className="animate-fade-in-up">
@@ -189,12 +187,7 @@ export default async function DashboardPage() {
               <div
                 key={stat.id}
                 id={`stat-${stat.id}`}
-                className="flex flex-col items-center gap-1 rounded-2xl py-3 px-2"
-                style={{
-                  background: "var(--surface)",
-                  boxShadow: "var(--shadow-sm)",
-                  border: "1px solid var(--border-subtle)",
-                }}
+                className="flex flex-col items-center gap-1 rounded-2xl py-3 px-2 bg-white/5 backdrop-blur-md border border-white/10"
               >
                 <span className="text-lg leading-none" aria-hidden="true">{stat.unit}</span>
                 <span
@@ -269,9 +262,6 @@ export default async function DashboardPage() {
         )}
 
       </div>
-
-      {/* ── Bottom Navigation ── */}
-      <BottomNav />
     </main>
   );
 }
