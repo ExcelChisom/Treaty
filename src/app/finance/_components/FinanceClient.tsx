@@ -90,28 +90,15 @@ function BudgetRing({ spent, budget }: { spent: number; budget: number }) {
 }
 
 function TransactionRow({ expense }: { expense: Expense }) {
-  const cat = getCat(expense.category);
   return (
-    <div
-      className="flex items-center gap-3 px-4 py-3 rounded-2xl transition-all active:scale-95"
-      style={{ background: "var(--surface)", border: "1px solid var(--border-subtle)" }}
-    >
-      <div
-        className="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
-        style={{ background: cat.bg }}
-        aria-hidden="true"
-      >
-        {cat.emoji}
+    <div className="flex justify-between items-center py-3 border-b border-[#F1F5F9]">
+      <div>
+        <div className="text-[14px] font-medium text-treaty-text-main">{expense.note || expense.category}</div>
+        <div className="text-[12px] text-treaty-text-muted">{expense.category} • {formatTime(expense.logged_at)}</div>
       </div>
-      <div className="flex-1 min-w-0">
-        <p className="text-sm font-bold text-text-primary truncate">
-          {expense.note || expense.category}
-        </p>
-        <p className="text-xs text-text-muted">{formatTime(expense.logged_at)}</p>
+      <div className="font-bold text-treaty-red">
+        -₦{expense.amount.toLocaleString("en-NG")}
       </div>
-      <span className="text-sm font-black flex-shrink-0" style={{ color: "#ef4444" }}>
-        -{formatNaira(expense.amount)}
-      </span>
     </div>
   );
 }
@@ -211,52 +198,26 @@ export default function FinanceClient({
   }
 
   return (
-    <div className="flex flex-col gap-4 px-4 pt-5">
-
-      {/* ── Summary Card ── */}
-      <section
-        className="rounded-3xl p-5 animate-fade-in-up"
-        style={{
-          background: "linear-gradient(135deg, #1e1b4b 0%, #4c1d95 100%)",
-          boxShadow: "var(--shadow-glow-purple)",
-        }}
-        aria-label="Today's spending summary"
-      >
-        <div className="flex items-center justify-between gap-4">
-          <div className="flex flex-col gap-3">
-            <div>
-              <p className="text-white/50 text-xs font-semibold uppercase tracking-widest mb-1">
-                Total Spent Today
-              </p>
-              <p
-                id="finance-total-spent"
-                className="text-3xl font-black text-white leading-none"
-                aria-live="polite"
-                aria-label={`Total spent today: ${formatNaira(totalSpent)}`}
-              >
-                {formatNaira(totalSpent)}
-              </p>
-            </div>
-            <div className="flex flex-col gap-1">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-green-400" aria-hidden="true" />
-                <p className="text-white/60 text-xs font-medium">
-                  Budget left:{" "}
-                  <span className="text-green-400 font-bold">{formatNaira(budgetLeft)}</span>
-                </p>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-white/30" aria-hidden="true" />
-                <p className="text-white/60 text-xs font-medium">
-                  Daily limit:{" "}
-                  <span className="text-white/80 font-bold">{formatNaira(DAILY_BUDGET)}</span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <BudgetRing spent={totalSpent} budget={DAILY_BUDGET} />
+    <div className="flex flex-col gap-4">
+      {/* ── Wallet Balance ── */}
+      <div className="text-center py-4">
+        <div className="text-[12px] text-treaty-text-muted">Available Balance</div>
+        <div className="text-[38px] font-extrabold text-treaty-text-main">
+          ₦<span className="text-treaty-primary">{(1250 - totalSpent).toLocaleString("en-NG", {minimumFractionDigits: 2})}</span>
         </div>
-      </section>
+      </div>
+
+      <div className="flex gap-3 my-2">
+        <button className="flex-1 py-3.5 rounded-[16px] font-semibold text-[14px] bg-treaty-primary text-white shadow-[0_4px_12px_rgba(0,210,106,0.3)] transition-transform active:scale-95 flex justify-center items-center gap-2">
+          <i className="fas fa-plus"></i> Fund
+        </button>
+        <button 
+          onClick={() => setShowAddForm(true)}
+          className="flex-1 py-3.5 rounded-[16px] font-semibold text-[14px] bg-transparent border-2 border-[#E2E8F0] text-treaty-text-main transition-transform active:scale-95 flex justify-center items-center gap-2"
+        >
+          <i className="fas fa-arrow-right"></i> Spend
+        </button>
+      </div>
 
       {/* ── Success toast ── */}
       {justAdded && (
@@ -274,22 +235,7 @@ export default function FinanceClient({
         </div>
       )}
 
-      {/* ── Add Expense button (collapsed) ── */}
-      {!showAddForm && (
-        <button
-          id="finance-open-add-form"
-          type="button"
-          onClick={() => setShowAddForm(true)}
-          disabled={isPending}
-          className="w-full py-4 rounded-2xl font-bold text-white text-base transition-all active:scale-95 animate-fade-in disabled:opacity-60"
-          style={{
-            background: "linear-gradient(135deg, #7c3aed, #4f46e5)",
-            boxShadow: "var(--shadow-glow-purple)",
-          }}
-        >
-          {isPending ? "Saving..." : "+ Log Expense"}
-        </button>
-      )}
+
 
       {/* ── Add Expense form (expanded) ── */}
       {showAddForm && (
@@ -425,16 +371,13 @@ export default function FinanceClient({
         </section>
       )}
 
-      {/* ── Transaction List ── */}
-      <section aria-label="Today's transactions">
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="text-sm font-bold text-text-primary">Today's Expenses</h2>
+      <section aria-label="Recent Transactions" className="mt-2">
+        <div className="font-semibold text-treaty-text-main mb-2">Recent Transactions</div>
           {allExpenses.length > 0 && (
             <span className="text-xs text-text-muted font-medium">
               {allExpenses.length} {allExpenses.length === 1 ? "entry" : "entries"}
             </span>
           )}
-        </div>
 
         {allExpenses.length === 0 ? (
           <div

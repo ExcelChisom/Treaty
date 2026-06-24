@@ -30,33 +30,27 @@ export default async function FitnessPage() {
   const isSubscribed = userId ? await hasAccess(userId, "fitness") : false;
 
   return (
-    <main className="max-w-5xl mx-auto w-full px-4 md:px-8 pt-6 pb-24 flex flex-col gap-6">
-
-
+    <div className="animate-fade-up pt-6">
       {isSubscribed ? (
         <FitnessDataSection userId={userId!} />
       ) : (
-        <div className="flex flex-col items-center justify-center flex-1 px-6 py-12 gap-6 animate-fade-in-up">
+        <div className="flex flex-col items-center justify-center flex-1 px-6 py-12 gap-6">
           <div
-            className="w-20 h-20 rounded-3xl flex items-center justify-center text-4xl"
-            style={{ background: "rgba(249,115,22,0.1)", border: "2px solid rgba(249,115,22,0.2)" }}
-            aria-hidden="true"
+            className="w-20 h-20 rounded-[24px] flex items-center justify-center text-4xl bg-[#FF7A00]/10 border-2 border-[#FF7A00]/20"
           >
             🔒
           </div>
           <div className="text-center">
-            <h2 className="text-xl font-black text-text-primary mb-2">
+            <h2 className="text-xl font-black text-treaty-text-main mb-2">
               Fitness is Premium
             </h2>
-            <p className="text-sm text-text-muted leading-relaxed max-w-xs">
+            <p className="text-sm text-treaty-text-muted leading-relaxed max-w-xs">
               Track your weight, log workouts, count steps and monitor
               your body transformation progress over time.
             </p>
           </div>
-          <div
-            className="w-full rounded-3xl p-5 bg-[#1E293B] border border-[#334155]"
-          >
-            <p className="text-xs font-bold text-text-muted mb-3 uppercase tracking-widest">
+          <div className="w-full rounded-[24px] p-5 bg-white/70 backdrop-blur-md border border-white/80">
+            <p className="text-xs font-bold text-treaty-text-muted mb-3 uppercase tracking-widest">
               What you unlock
             </p>
             {[
@@ -65,16 +59,15 @@ export default async function FitnessPage() {
               "👟 Daily step counter",
               "📈 Progress timeline",
             ].map((item) => (
-              <div key={item} className="flex items-center gap-2 py-2">
-                <span className="text-sm">{item}</span>
+              <div key={item} className="flex items-center gap-2 py-2 text-treaty-text-main">
+                <span className="text-sm font-medium">{item}</span>
               </div>
             ))}
           </div>
           <UpgradeButton defaultPlan="fitness" label="Unlock Fitness" />
         </div>
       )}
-
-    </main>
+    </div>
   );
 }
 

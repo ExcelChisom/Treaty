@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { logMeal } from "@/actions/food";
 import { Food } from "@/types/database";
+import { useShreddy } from "@/context/ShreddyProvider";
 
 interface LogMealButtonProps {
   food: Food;
@@ -12,10 +13,14 @@ export default function LogMealButton({ food }: LogMealButtonProps) {
   const [isPending, startTransition] = useTransition();
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const { shreddyReact } = useShreddy();
 
-  const handleLog = () => {
+  const handleLog = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setIsSuccess(false);
     setErrorMsg("");
+
+    shreddyReact("food", food.name);
 
     startTransition(async () => {
       try {
@@ -32,7 +37,7 @@ export default function LogMealButton({ food }: LogMealButtonProps) {
     });
   };
 
-  let buttonText = "Log Meal";
+  let buttonText = "Log";
   if (isPending) buttonText = "Logging...";
   if (isSuccess) buttonText = "Logged! ✅";
   if (errorMsg) buttonText = errorMsg;
@@ -41,7 +46,7 @@ export default function LogMealButton({ food }: LogMealButtonProps) {
     <button
       onClick={handleLog}
       disabled={isPending || isSuccess}
-      className="w-full mt-2 py-3 rounded-lg font-bold text-white text-sm transition-all active:scale-95 disabled:opacity-60 bg-[#00C853]"
+      className="mt-2 py-1.5 px-4 rounded-full font-bold text-white text-xs transition-transform active:scale-95 disabled:opacity-60 bg-treaty-primary shadow-[0_4px_12px_rgba(0,210,106,0.3)]"
     >
       {buttonText}
     </button>

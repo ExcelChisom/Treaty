@@ -11,83 +11,54 @@ export default async function FoodDiscoveryPage() {
   if (error) {
     console.error("Supabase fetch error:", error.message);
     return (
-      <main className="min-h-screen bg-[#0F172A] text-white p-4 font-poppins flex flex-col items-center justify-center">
-        <p className="text-red-400">Failed to load campus menu. Please try again later.</p>
+      <main className="flex flex-col items-center justify-center pt-20">
+        <p className="text-treaty-red font-bold">Failed to load campus menu. Please try again later.</p>
       </main>
     );
   }
 
   return (
-    <main className="min-h-screen bg-[#0F172A] text-white p-4 font-poppins flex flex-col gap-6">
-      <header className="flex flex-col gap-4">
-        <h1 className="text-2xl font-bold">Campus Hotspots & Menu</h1>
-        
-        {/* Shreddy Banner */}
-        <div className="bg-[#1E293B] border border-[#00C853]/30 rounded-2xl p-4 flex flex-row items-center gap-4">
-          <div className="w-10 h-10 rounded-full bg-[#00C853]/20 flex items-center justify-center text-xl shrink-0">
-            🦖
-          </div>
-          <div>
-            <h3 className="text-[#00C853] text-sm font-semibold mb-0.5">Shreddy says:</h3>
-            <p className="text-white text-sm leading-snug">
-              "Fish & chips before CST? Interesting decision."
-            </p>
-          </div>
-        </div>
-      </header>
+    <div className="animate-fade-up pt-6">
+      <div className="bg-white/70 backdrop-blur-md border border-white/80 rounded-[16px] p-3 flex gap-3 mb-5">
+        <i className="fas fa-search text-treaty-text-muted mt-1"></i>
+        <input 
+          type="text" 
+          placeholder="Search meals..." 
+          className="border-none outline-none w-full text-[14px] bg-transparent text-treaty-text-main placeholder:text-treaty-text-muted" 
+        />
+      </div>
 
-      {/* Food Grid */}
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {foods?.map((food: Food) => {
-          let budgetColor = "bg-gray-600";
-          if (food.budget_tier === "Medium") budgetColor = "bg-blue-600";
-          if (food.budget_tier === "Premium") budgetColor = "bg-purple-600";
-          if (food.budget_tier === "Budget") budgetColor = "bg-green-600";
+      <div className="flex gap-2.5 overflow-x-auto pb-3 mb-4 no-scrollbar">
+        <span className="px-[18px] py-[8px] rounded-[20px] text-[13px] font-medium whitespace-nowrap bg-treaty-primary text-white border border-treaty-primary">All</span>
+        <span className="px-[18px] py-[8px] rounded-[20px] text-[13px] font-medium whitespace-nowrap bg-white/70 border border-[#E2E8F0] text-treaty-text-main">Burgers</span>
+        <span className="px-[18px] py-[8px] rounded-[20px] text-[13px] font-medium whitespace-nowrap bg-white/70 border border-[#E2E8F0] text-treaty-text-main">Rice</span>
+        <span className="px-[18px] py-[8px] rounded-[20px] text-[13px] font-medium whitespace-nowrap bg-white/70 border border-[#E2E8F0] text-treaty-text-main">Snacks</span>
+      </div>
 
-          let fitnessColor = "bg-gray-600";
-          if (food.fitness_tag?.includes("Protein")) fitnessColor = "bg-green-600";
-          if (food.fitness_tag?.includes("Carb")) fitnessColor = "bg-orange-600";
-          if (food.fitness_tag?.includes("Cheat")) fitnessColor = "bg-red-600";
-
-          return (
-            <div 
-              key={food.id}
-              className="bg-[#1E293B] border border-[#334155] rounded-xl p-4 flex flex-col gap-3"
-            >
-              <div className="flex justify-between items-start">
-                <div>
-                  <h3 className="font-bold text-lg">{food.name}</h3>
-                  <p className="text-sm text-gray-400">{food.vendor}</p>
-                </div>
-                <div className="text-right font-bold text-[#00C853]">
-                  ₦{food.price?.toLocaleString("en-NG")}
-                </div>
-              </div>
-              
-              <div className="flex flex-wrap gap-2 mt-auto">
-                {food.budget_tier && (
-                  <span className={`text-[10px] px-2 py-1 rounded-full font-bold text-white uppercase tracking-wider ${budgetColor}`}>
-                    {food.budget_tier}
-                  </span>
-                )}
-                {food.fitness_tag && (
-                  <span className={`text-[10px] px-2 py-1 rounded-full font-bold text-white uppercase tracking-wider ${fitnessColor}`}>
-                    {food.fitness_tag}
-                  </span>
-                )}
-              </div>
-
+      <div className="flex flex-col gap-3">
+        {foods?.map((food: Food) => (
+          <div 
+            key={food.id}
+            className="flex justify-between items-center bg-white/70 backdrop-blur-md rounded-[16px] px-4 py-[14px] border border-white/80"
+          >
+            <div>
+              <h4 className="text-[15px] font-semibold text-treaty-text-main">{food.name}</h4>
+              <p className="text-[12px] text-treaty-text-muted">{food.vendor} • {food.fitness_tag}</p>
+            </div>
+            <div className="text-right flex flex-col items-end">
+              <div className="font-bold text-treaty-red">₦{food.price?.toLocaleString("en-NG")}</div>
+              <div className="text-treaty-text-muted text-[12px]">{food.calories || 0} cal</div>
               <LogMealButton food={food} />
             </div>
-          );
-        })}
+          </div>
+        ))}
 
         {(!foods || foods.length === 0) && (
-          <div className="col-span-1 md:col-span-2 text-center text-gray-400 py-12">
+          <div className="text-center text-treaty-text-muted py-12">
             No active menu items found.
           </div>
         )}
-      </section>
-    </main>
+      </div>
+    </div>
   );
 }

@@ -1,220 +1,71 @@
-/* ─── 1. External Font Import (MUST be absolute first) ───────────────────── */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
-
-/* ─── 2. Tailwind CSS v4 Core (equivalent of base + components + utilities) ─ */
-/*      In Tailwind v4, this single directive replaces the three v3 directives  */
-/*      (@tailwind base / @tailwind components / @tailwind utilities).           */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
 @import "tailwindcss";
+@plugin "tailwind-scrollbar-hide";
 
-/* ─── 3. Treaty Design System Tokens ────────────────────────────────────── */
 :root {
-  /* ── Brand Colors ── */
-  --treaty-green: #00C853;
-  --treaty-green-dark: #00A042;
-  --treaty-green-light: #33D375;
-  --treaty-green-glow: rgba(0, 200, 83, 0.25);
-
-  --treaty-yellow: #FDC400;
-  --treaty-red: #FF6B68;
-  
-  --treaty-purple: #7C4DFF;
-  --treaty-purple-dark: #651FFF;
-  --treaty-purple-light: #B388FF;
-  --treaty-purple-glow: rgba(124, 77, 255, 0.25);
-
-  --treaty-teal: #14B8A6;
-  
-  --treaty-orange: #f97316; /* Keeping for compatibility if needed */
-
-  /* ── Semantic Surfaces ── */
-  --background: #0F172A;
-  --surface: rgba(255, 255, 255, 0.05);
-  --surface-alt: rgba(255, 255, 255, 0.1);
-  --border: rgba(255, 255, 255, 0.1);
-  --border-subtle: rgba(255, 255, 255, 0.05);
-
-  /* ── Text Scale ── */
-  --text-primary: #ffffff;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --text-inverse: #0f172a;
-
-  /* ── Shadows ── */
-  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 16px 0 rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
-  --shadow-lg: 0 10px 32px 0 rgba(0, 0, 0, 0.10), 0 4px 8px -4px rgba(0, 0, 0, 0.06);
-  --shadow-glow-green: 0 0 24px rgba(34, 197, 94, 0.35);
-  --shadow-glow-purple: 0 0 24px rgba(109, 40, 217, 0.35);
-  --shadow-glow-orange: 0 0 24px rgba(249, 115, 22, 0.35);
-
-  /* ── Border Radius ── */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-  --radius-full: 9999px;
-
-  /* ── Transitions ── */
-  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  --primary: #00D26A;
+  --gold: #FFB800;
+  --red: #FF5A5F;
+  --orange: #FF7A00;
+  --purple: #6D5DF6;
+  --bg: #F8FAFC;
+  --text-main: #1E293B;
+  --text-muted: #64748B;
+  --radius: 24px;
+  --nav-height: 80px;
 }
 
-/* ─── 4. Tailwind v4 Theme Extension (custom color & font tokens) ────────── */
 @theme inline {
-  --color-treaty-green: var(--treaty-green);
-  --color-treaty-green-dark: var(--treaty-green-dark);
-  --color-treaty-green-light: var(--treaty-green-light);
-  --color-treaty-yellow: var(--treaty-yellow);
-  --color-treaty-red: var(--treaty-red);
-  --color-treaty-purple: var(--treaty-purple);
-  --color-treaty-purple-dark: var(--treaty-purple-dark);
-  --color-treaty-purple-light: var(--treaty-purple-light);
-  --color-treaty-teal: var(--treaty-teal);
-  --color-treaty-orange: var(--treaty-orange);
-  --color-treaty-dark: #0F172A;
-  --color-surface: var(--surface);
-  --color-surface-alt: var(--surface-alt);
-  --color-text-primary: var(--text-primary);
-  --color-text-secondary: var(--text-secondary);
+  --color-primary: var(--primary);
+  --color-gold: var(--gold);
+  --color-red: var(--red);
+  --color-orange: var(--orange);
+  --color-purple: var(--purple);
+  --color-bg: var(--bg);
+  --color-text-main: var(--text-main);
   --color-text-muted: var(--text-muted);
-  --font-poppins: "Poppins", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  --radius-app: var(--radius);
 }
 
-/* ─── 5. Base Reset ──────────────────────────────────────────────────────── */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-
-html {
-  font-size: 16px;
-  -webkit-text-size-adjust: 100%;
-  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  font-family: "Poppins", sans-serif;
-  background-color: var(--background);
-  color: var(--text-primary);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overscroll-behavior: none;
+  font-family: "Inter", sans-serif;
+  background-color: #e2e8f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
 }
 
-/* ─── Scrollbar ──────────────────────────────────────────────────────────── */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: var(--radius-full);
+/* Base animations */
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
-/* ─── Focus Ring ─────────────────────────────────────────────────────────── */
-:focus-visible {
-  outline: 2px solid var(--treaty-green);
-  outline-offset: 2px;
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(2deg); }
 }
 
-/* ─── 6. Custom Utility Layer ────────────────────────────────────────────── */
+@keyframes bounceCard {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.96); }
+  100% { transform: scale(1); }
+}
+
 @layer utilities {
-
-  /* ── Keyframe Animations ── */
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-  @keyframes scaleIn {
-    from { opacity: 0; transform: scale(0.92); }
-    to   { opacity: 1; transform: scale(1); }
-  }
-  @keyframes pulseGlow {
-    0%, 100% { box-shadow: 0 0 12px rgba(34, 197, 94, 0.3); }
-    50%       { box-shadow: 0 0 28px rgba(34, 197, 94, 0.6); }
-  }
-  @keyframes shimmer {
-    0%   { background-position: -200% center; }
-    100% { background-position:  200% center; }
-  }
-  @keyframes bounceSoft {
-    0%, 100% { transform: translateY(0); }
-    50%       { transform: translateY(-4px); }
-  }
-  @keyframes spinSlow {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
-  }
-
-  /* ── Animation Utility Classes ── */
-  .animate-fade-in-up  { animation: fadeInUp  0.5s var(--transition-base) both; }
-  .animate-fade-in     { animation: fadeIn    0.4s ease both; }
-  .animate-scale-in    { animation: scaleIn   0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
-  .animate-pulse-glow  { animation: pulseGlow 2s ease-in-out infinite; }
-  .animate-bounce-soft { animation: bounceSoft 2s ease-in-out infinite; }
-  .animate-spin-slow   { animation: spinSlow  8s linear infinite; }
-
-  /* ── Staggered Delays ── */
-  .delay-100 { animation-delay: 100ms; }
-  .delay-200 { animation-delay: 200ms; }
-  .delay-300 { animation-delay: 300ms; }
-  .delay-400 { animation-delay: 400ms; }
-  .delay-500 { animation-delay: 500ms; }
-
-  /* ── Scale Utilities ── */
-  .active\:scale-98:active { transform: scale(0.98); }
-
-  /* ── iOS Safe Area ── */
-  /* pb-safe adds bottom padding equal to the device's home indicator height */
-  .pb-safe {
-    padding-bottom: env(safe-area-inset-bottom, 0px);
-  }
-
-  /* ── Mobile Shell (DEPRECATED) ── */
-  .treaty-shell {
-    /* Kept empty for backwards compatibility during migration sweep */
-  }
-
-  /* ── Gradients ── */
-  .gradient-green {
-    background: linear-gradient(135deg, var(--treaty-green) 0%, var(--treaty-green-dark) 100%);
-  }
-  .gradient-purple {
-    background: linear-gradient(135deg, var(--treaty-purple) 0%, var(--treaty-purple-dark) 100%);
-  }
-  .gradient-hero {
-    background: linear-gradient(160deg, #0f172a 0%, #1e1b4b 50%, #14532d 100%);
-  }
-  .gradient-card-green {
-    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%);
-  }
-  .gradient-card-purple {
-    background: linear-gradient(135deg, rgba(109, 40, 217, 0.1) 0%, rgba(109, 40, 217, 0.05) 100%);
-  }
-  .gradient-shimmer {
-    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
-    background-size: 200% auto;
-    animation: shimmer 2s linear infinite;
-  }
-
-  /* ── Glassmorphism ── */
-  .glass {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  .glass-dark {
-    background: rgba(15, 23, 42, 0.75);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-  }
+  .animate-fade-up { animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+  .animate-float { animation: float 3s ease-in-out infinite; }
+  .animate-bounce-card { animation: bounceCard 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
 }

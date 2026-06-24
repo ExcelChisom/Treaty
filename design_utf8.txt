@@ -1,0 +1,229 @@
+﻿ Hi, please open your Vs code, input this codes in .html, .CSS and .js respectively...
+<div class="app">
+  <div class="header">
+    <div class="greeting"><h1>Hey Carlin! 👋</h1><p>Your campus, your rule.</p></div>
+    <div class="badge">PREMIUM</div>
+  </div>
+
+  <div class="content" id="appContent">
+    <!-- HOME -->
+    <div class="page active" id="page-home">
+      <div class="shreddy-card" id="shreddyCard" onclick="triggerShreddyTap()">
+        <div class="shreddy-avatar">
+          <svg class="shreddy-svg" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" fill="#00D26A" stroke="#00B85C" stroke-width="4"/>
+            <g class="eye-group eye-left" id="eyeL"><circle cx="35" cy="40" r="7" fill="white"/><circle cx="36" cy="40" r="3.5" fill="#1E293B"/></g>
+            <g class="eye-group eye-right" id="eyeR"><circle cx="65" cy="40" r="7" fill="white"/><circle cx="66" cy="40" r="3.5" fill="#1E293B"/></g>
+            <path class="shreddy-mouth smile" id="shreddyMouth" d="M35 55 Q50 68 65 55" stroke="white" stroke-width="4" stroke-linecap="round" fill="none"/>
+            <rect x="40" y="70" width="20" height="12" rx="4" fill="white" opacity="0.8"/>
+            <text x="50" y="80" font-size="12" font-weight="900" text-anchor="middle" fill="#00B85C">T</text>
+          </svg>
+        </div>
+        <div class="shreddy-bubble">
+          <h4 id="shreddyTag">⚡ SHREDDY SAYS:</h4>
+          <p id="shreddyText">"Fufu before a 2-hour lecture? Bold strategy."</p>
+          <span class="tap">Tap me for more advice</span>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card wallet-card"><div class="card-title"><i class="fas fa-wallet" style="color:#00D26A"></i> Wallet</div><div class="card-value">₦1,250.00</div><div class="card-sub">+ ₦150 today</div></div>
+        <div class="card food-card"><div class="card-title"><i class="fas fa-utensils" style="color:#FF5A5F"></i> Food</div><div class="card-value">Gizdodo</div><div class="card-sub">Caf 2 • ₦2,000</div></div>
+        <div class="card fitness-card"><div class="card-title"><i class="fas fa-dumbbell" style="color:#FF7A00"></i> Fitness</div><div><div class="card-value">450 cal</div><div class="card-sub">Remaining</div></div><div class="fitness-ring">65%</div></div>
+        <div class="card schedule-card"><div class="card-title"><i class="fas fa-calendar-day" style="color:#6D5DF6"></i> Schedule</div><div class="card-value">CST Deadline</div><div class="card-sub">Due tomorrow, 9:00 AM</div></div>
+      </div>
+      <div class="insight-card"><span>Today's Insights</span><span class="chip">🔥 3 Day Streak</span><span class="text-muted">Spent on food</span><span>₦2,500</span><span class="text-muted">Budget left</span><span style="color:#FF7A00; font-weight:600;">₦800</span></div>
+    </div>
+
+    <!-- FOOD -->
+    <div class="page" id="page-food">
+      <div class="search-bar"><i class="fas fa-search" style="color:#64748B"></i><input type="text" placeholder="Search meals..."></div>
+      <div class="categories"><span class="cat-chip active">All</span><span class="cat-chip">Burgers</span><span class="cat-chip">Rice</span><span class="cat-chip">Snacks</span></div>
+      <div class="food-item" onclick="shreddyReact('food', 'Gizdodo')"><div><h4>Gizdodo</h4><p>Caf 2 • High Carb</p></div><div style="text-align:right;"><div class="price">₦2,000</div><div class="text-muted">450 cal</div></div></div>
+      <div class="food-item" onclick="shreddyReact('food', 'Chicken Burger')"><div><h4>Chicken Burger</h4><p>MORH • Cheat Meal</p></div><div style="text-align:right;"><div class="price">₦2,500</div><div class="text-muted">620 cal</div></div></div>
+    </div>
+
+    <!-- WALLET -->
+    <div class="page" id="page-wallet">
+      <div class="wallet-balance"><div class="text-muted">Available Balance</div><div class="amount">₦<span>1,250.00</span></div></div>
+ <div class="wallet-actions"><button class="btn-primary" onclick="shreddyReact('wallet', 'fund')"><i class="fas fa-plus"></i> Fund</button><button class="btn-outline" onclick="shreddyReact('wallet', 'spend')"><i class="fas fa-arrow-right"></i> Spend</button></div>
+      <div style="font-weight:600; margin:20px 0 10px;">Recent Transactions</div>
+      <div class="trans-item"><div><div class="desc">Chicken Burger</div><div class="meta">Food • 2 mins ago</div></div><div class="amount negative">-₦2,500</div></div>
+      <div class="trans-item"><div><div class="desc">Wallet Top-up</div><div class="meta">Paystack • 1 hour ago</div></div><div class="amount positive">+₦5,000</div></div>
+    </div>
+
+    <!-- FITNESS -->
+    <div class="page" id="page-fitness">
+      <div class="fit-header"><div class="fit-ring">65%</div><div><h3>Goal: Lose Weight</h3><p class="text-muted">Target: 75kg • Current: 81kg</p></div></div>
+      <div class="card"><div><span class="card-title">Today's Intake</span><span>1,450 / 2,000 cal</span></div><div class="macro-bar"><div class="p"></div><div class="c"></div><div class="f"></div></div></div>
+    </div>
+
+    <!-- CALENDAR -->
+    <div class="page" id="page-calendar">
+      <div class="cal-header"><h3><i class="fas fa-chevron-left"></i> June 2026</h3><span class="text-muted"><i class="fas fa-chevron-right"></i></span></div>
+      <div class="cal-grid"><span class="cal-day">S</span><span class="cal-day">M</span><span class="cal-day">T</span><span class="cal-day">W</span><span class="cal-day">T</span><span class="cal-day">F</span><span class="cal-day">S</span><span class="cal-day text-muted">1</span><span class="cal-day">2</span><span class="cal-day">3</span><span class="cal-day">4</span><span class="cal-day">5</span><span class="cal-day">6</span><span class="cal-day">7</span><span class="cal-day">8</span><span class="cal-day">9</span><span class="cal-day">10</span><span class="cal-day">11</span><span class="cal-day">12</span><span class="cal-day">13</span><span class="cal-day">14</span><span class="cal-day">15</span><span class="cal-day">16</span><span class="cal-day">17</span><span class="cal-day active">18</span><span class="cal-day">19</span></div>
+      <div style="font-weight:600; margin-bottom:12px;">Today's Tasks</div>
+      <div class="task-item" onclick="shreddyReact('schedule', 'deadline')"><div class="task-dot urgent"></div><div><div>CST Assignment Deadline</div><div class="text-muted">9:00 AM • 2 hours left</div></div></div>
+    </div>
+
+    <!-- PROFILE -->
+    <div class="page" id="page-profile">
+      <div class="prof-header"><div class="prof-avatar">C</div><h3>Carlin</h3><p class="text-muted">Covenant University • CST '27</p></div>
+      <div class="prof-item"><span>Subscription</span><span style="color:#FFB800; font-weight:600;">Premium • 28 Days</span></div>
+      <div class="prof-item"><span>Telegram Sync</span><span style="color:#00D26A;"><i class="fas fa-check-circle"></i> Connected</span></div>
+    </div>
+  </div>
+
+  <!-- Bottom Nav -->
+  <div class="nav">
+    <div class="nav-item active" onclick="switchTab('home')"><i class="fas fa-house"></i><span>Home</span></div>
+    <div class="nav-item" onclick="switchTab('food')"><i class="fas fa-utensils"></i><span>Food</span></div>
+    <div class="nav-item" onclick="switchTab('wallet')"><i class="fas fa-wallet"></i><span>Wallet</span></div>
+    <div class="nav-item" onclick="switchTab('fitness')"><i class="fas fa-dumbbell"></i><span>Fitness</span></div>
+    <div class="nav-item" onclick="switchTab('calendar')"><i class="fas fa-calendar-day"></i><span>Calendar</span></div>
+    <div class="nav-item" onclick="switchTab('profile')"><i class="fas fa-user"></i><span>Profile</span></div>
+  </div>
+</div>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+ -------------- now for .CSS
+:root{--primary:#00D26A;--gold:#FFB800;--red:#FF5A5F;--orange:#FF7A00;--purple:#6D5DF6;--bg:#F8FAFC;--text-main:#1E293B;--text-muted:#64748B;--radius:24px;--nav-height:80px;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;-webkit-tap-highlight-color:transparent;}
+body{background:#e2e8f0;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px;}
+.app{width:100%;max-width:800px;height:95vh;max-height:900px;background:var(--bg);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,0.1);position:relative;}
+.nav{position:absolute;bottom:0;width:100%;height:var(--nav-height);background:rgba(255,255,255,0.6);backdrop-filter:blur(16px);border-top:1px solid rgba(255,255,255,0.8);display:flex;justify-content:space-around;align-items:center;padding:0 8px 12px;z-index:20;}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:8px 16px;border-radius:16px;transition:0.3s;}
+.nav-item i{font-size:22px;color:var(--text-muted);transition:0.3s;}
+.nav-item span{font-size:10px;font-weight:500;color:var(--text-muted);}
+.nav-item.active{background:rgba(0,210,106,0.1);}
+.nav-item.active i{color:var(--primary);transform:translateY(-2px);}
+.nav-item.active span{color:var(--primary);font-weight:700;}
+.header{padding:24px 24px 16px;display:flex;justify-content:space-between;align-items:flex-start;background:var(--bg);}
+.greeting h1{font-size:26px;font-weight:800;color:var(--text-main);}
+.greeting p{font-size:14px;color:var(--text-muted);margin-top:2px;}
+.badge{background:var(--gold);color:#fff;padding:6px 14px;border-radius:20px;font-size:11px;font-weight:700;box-shadow:0 4px 12px rgba(255,184,0,0.3);}
+.content{flex:1;overflow-y:auto;padding:0 24px 100px;scroll-behavior:smooth;}
+.content::-webkit-scrollbar{display:none;}
+.page{display:none;animation:fadeUp 0.4s cubic-bezier(0.16,1,0.3,1);}
+.page.active{display:block;}
+@keyframes fadeUp{0%{opacity:0;transform:translateY(20px);}100%{opacity:1;transform:translateY(0);}}
+.shreddy-card{background:linear-gradient(135deg,var(--primary)0%,#00B85C 100%);border-radius:var(--radius);padding:20px 24px;margin-bottom:24px;color:#fff;display:flex;align-items:center;gap:18px;box-shadow:0 12px 32px rgba(0,210,106,0.3);cursor:pointer;transition:transform 0.2s cubic-bezier(0.34,1.56,0.64,1);}
+.shreddy-card:active{transform:scale(0.96);}
+.shreddy-avatar{width:70px;height:70px;flex-shrink:0;animation:float 3s ease-in-out infinite;}
+.shreddy-svg{width:100%;height:100%;overflow:visible;}
+.eye-group{transition:transform 0.15s ease;transform-origin:center;}
+.eye-group.blink{transform:scaleY(0.05);}
+.eye-group.wink-right{transform:scaleY(0.05);transform-origin:64px 40px;}
+.eye-group.wink-left{transform:scaleY(0.05);transform-origin:36px 40px;}
+.shreddy-mouth{transition:all 0.3s ease;}
+.shreddy-mouth.smile{d:path("M35 55 Q50 68 65 55");}
+.shreddy-mouth.speech{d:path("M35 58 Q50 78 65 58");}
+.shreddy-bubble{flex:1;}
+.shreddy-bubble h4{font-size:13px;font-weight:700;opacity:0.8;margin-bottom:4px;letter-spacing:0.5px;}
+.shreddy-bubble p{font-size:15px;font-weight:500;line-height:1.5;}
+.shreddy-bubble .tap{font-size:10px;opacity:0.6;margin-top:8px;display:block;}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-8px) rotate(2deg);}}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.card{background:rgba(255,255,255,0.7);backdrop-filter:blur(8px);border-radius:var(--radius);padding:18px;box-shadow:0 4px 16px rgba(0,0,0,0.04);border:1px solid rgba(255,255,255,0.8);transition:transform 0.2s;}
+.card:active{transform:scale(0.97);}
+.card-title{font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+ .card-value{font-size:22px;font-weight:800;color:var(--text-main);}
+.card-sub{font-size:12px;color:var(--text-muted);margin-top:4px;}
+.fitness-ring{width:44px;height:44px;border-radius:50%;background:conic-gradient(var(--orange)65%,#E2E8F0 0);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--text-main);margin-left:auto;flex-shrink:0;}
+.insight-card{margin-top:16px;padding:16px;border-radius:var(--radius);background:rgba(255,255,255,0.7);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.8);}
+.insight-card span{display:inline-block;width:100%;margin:4px 0;}
+.text-muted{color:var(--text-muted);font-size:12px;}
+.chip{background:#F1F5F9;padding:2px 10px;border-radius:12px;font-size:10px;font-weight:600;display:inline-block;}
+.search-bar{border-radius:16px;padding:12px 16px;display:flex;gap:12px;background:rgba(255,255,255,0.7);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.8);margin-bottom:20px;}
+.search-bar input{border:none;outline:none;width:100%;font-size:14px;background:transparent;}
+.categories{display:flex;gap:10px;overflow-x:auto;padding-bottom:12px;margin-bottom:16px;}
+.cat-chip{padding:8px 18px;border-radius:20px;font-size:13px;font-weight:500;white-space:nowrap;background:rgba(255,255,255,0.7);border:1px solid #E2E8F0;}
+.cat-chip.active{background:var(--primary);color:#fff;border-color:var(--primary);}
+.food-item{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.7);backdrop-filter:blur(8px);border-radius:16px;padding:14px 16px;margin-bottom:12px;border:1px solid rgba(255,255,255,0.8);cursor:pointer;}
+.food-item h4{font-size:15px;font-weight:600;}
+.food-item p{font-size:12px;color:var(--text-muted);}
+.food-item .price{font-weight:700;color:var(--red);}
+.wallet-balance{text-align:center;padding:16px 0;}
+.wallet-balance .amount{font-size:38px;font-weight:800;}
+.wallet-balance .amount span{color:var(--primary);}
+.wallet-actions{display:flex;gap:12px;margin:20px 0;}
+.wallet-actions button{flex:1;padding:14px;border-radius:16px;border:none;font-weight:600;font-size:14px;cursor:pointer;transition:0.2s;}
+.btn-primary{background:var(--primary);color:#fff;box-shadow:0 4px 12px rgba(0,210,106,0.3);}
+.btn-outline{background:transparent;border:2px solid #E2E8F0;color:var(--text-main);}
+.btn-primary:active,.btn-outline:active{transform:scale(0.95);}
+.trans-item{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #F1F5F9;}
+.trans-item .desc{font-size:14px;font-weight:500;}
+.trans-item .meta{font-size:12px;color:var(--text-muted);}
+.trans-item .amount.negative{color:var(--red);}
+.trans-item .amount.positive{color:var(--primary);}
+.fit-header{display:flex;align-items:center;gap:20px;border-radius:var(--radius);padding:20px;background:rgba(255,255,255,0.7);backdrop-filter:blur(8px);margin-bottom:20px;}
+.fit-ring{width:80px;height:80px;border-radius:50%;background:conic-gradient(var(--orange)65%,#E2E8F0 0);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;flex-shrink:0;}
+.macro-bar{display:flex;gap:6px;height:8px;border-radius:4px;overflow:hidden;margin:10px 0;}
+.macro-bar .p{flex:30;background:var(--red);}
+.macro-bar .c{flex:45;background:var(--gold);}
+.macro-bar .f{flex:25;background:var(--purple);}
+.cal-header{display:flex;justify-content:space-between;margin-bottom:16px;}
+.cal-header h3{font-size:18px;font-weight:700;}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:20px;}
+.cal-day{text-align:center;padding:8px 0;font-size:13px;color:var(--text-muted);border-radius:8px;}
+.cal-day.active{background:var(--primary);color:#fff;font-weight:700;}
+.task-item{display:flex;align-items:center;gap:12px;padding:14px;border-radius:14px;background:rgba(255,255,255,0.7);backdrop-filter:blur(8px);margin-bottom:10px;cursor:pointer;}
+ .task-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.task-dot.urgent{background:var(--red);}
+.task-dot.upcoming{background:var(--gold);}
+.prof-header{text-align:center;padding:20px 0;}
+.prof-avatar{width:80px;height:80px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700;margin:0 auto 12px;}
+.prof-item{display:flex;justify-content:space-between;padding:16px;border-radius:16px;background:rgba(255,255,255,0.7);backdrop-filter:blur(8px);margin-bottom:8px;}
+
+----------finally for .js 
+function switchTab(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.querySelector(.nav-item:nth-child(${['home','food','wallet','fitness','calendar','profile'].indexOf(id)+1})).classList.add('active');
+  document.getElementById('appContent').scrollTop=0;
+  const m={home:"Checking the home base. I see you.",food:"Food tab? Make sure you're not blowing your budget.",wallet:"You have ₦1,250. The shawarma stand sees opportunity.",fitness:"One workout closer to becoming unstoppable.",calendar:"Deadline tomorrow. Future-you says thank you.",profile:"Profile check. You're looking good, Carlin."};
+  setShreddyMessage(m[id]||"I'm watching you.");
+  triggerShreddyAnimation('wink-right',200);
+  bounceCard();
+}
+
+const quotes=["Fufu before a 2-hour lecture? Bold strategy.","You have ₦650 left. The shawarma stand sees opportunity.","One workout closer to becoming unstoppable.","Deadline tomorrow. Future-you says thank you.","Buying from Caf 2 instead of Caf 1 could save you ₦250.","Your budget says ₦800. Your taste buds say Burger Supreme. One needs counselling.","Burger Supreme detected. Your athletic silhouette just sighed dramatically."];
+
+function triggerShreddyTap(){
+  let c=document.getElementById('shreddyText').innerText;
+  let n=quotes[0];
+  for(let i=0;i<quotes.length;i++){if(quotes[i]===c){n=quotes[(i+1)%quotes.length];break;}}
+  setShreddyMessage(n);
+  triggerShreddyAnimation('blink',300);
+  bounceCard();
+}
+
+function shreddyReact(type,data){
+  let msg="",anim="blink";
+  if(type==='food'){if(data==='Gizdodo')msg="Gizdodo? Your eyelids are about to negotiate with gravity.";else if(data==='Chicken Burger')msg="Burger Supreme. Your gym session just gasped.";else msg=Ordering ${data}? Let me check your wallet first.;}
+  else if(type==='wallet'){if(data==='fund'){msg="Money coming in! Shreddy approves.";anim="wink-right";}else{msg="Spending? Make sure you track it in the ledger.";}}
+  else if(type==='schedule'){if(data==='deadline')msg="Deadline in 2 hours. Don't make future-you suffer.";else msg="Planning ahead. I respect it.";}
+  setShreddyMessage(msg);
+  triggerShreddyAnimation(anim,300);
+  bounceCard();
+}
+
+function setShreddyMessage(t){document.getElementById('shreddyText').innerText=t;}
+
+function triggerShreddyAnimation(type,duration){
+  const eL=document.getElementById('eyeL'),eR=document.getElementById('eyeR'),m=document.getElementById('shreddyMouth');
+  eL.classList.remove('blink','wink-left');eR.classList.remove('blink','wink-right');
+  m.className='shreddy-mouth smile';
+  if(type==='blink'){eL.classList.add('blink');eR.classList.add('blink');}
+  else if(type==='wink-right'){eR.classList.add('wink-right');m.className='shreddy-mouth speech';}
+  else if(type==='wink-left'){eL.classList.add('wink-left');m.className='shreddy-mouth speech';}
+  setTimeout(()=>{eL.classList.remove('blink','wink-left');eR.classList.remove('blink','wink-right');m.className='shreddy-mouth smile';},duration);
+}
+
+function bounceCard(){
+  const c=document.getElementById('shreddyCard');
+  c.style.animation='none';
+  c.offsetHeight;c.style.animation='bounce-card 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+  setTimeout(()=>c.style.animation='',500);
+}
+
+setInterval(()=>{if(document.getElementById('shreddyCard'))triggerShreddyAnimation('blink',200);},4500);
