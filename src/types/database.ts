@@ -39,3 +39,11 @@ export interface ShreddyMessage {
   response_text: string;
   tone: string;
 }
+
+export interface MealLog {
+  id: string;
+  user_id: string;
+  food_id: string;
+  quantity: number;
+  consumed_at: string;
+}

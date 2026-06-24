@@ -48,6 +48,15 @@ CREATE TABLE IF NOT EXISTS shreddy_messages (
   tone TEXT NOT NULL
 );
 
+-- Meal Logs Table
+CREATE TABLE IF NOT EXISTS meal_logs (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  user_id TEXT NOT NULL,
+  food_id UUID REFERENCES foods(id),
+  quantity INTEGER DEFAULT 1,
+  consumed_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
 -- Seed Data for Foods (Covenant University Menu)
 INSERT INTO foods (name, price, vendor, category, budget_tier, fitness_tag)
 VALUES 

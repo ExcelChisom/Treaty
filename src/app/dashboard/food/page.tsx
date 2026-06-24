@@ -1,5 +1,6 @@
 import { supabase } from "@/lib/supabase";
 import { Food } from "@/types/database";
+import LogMealButton from "@/components/ui/LogMealButton";
 
 export default async function FoodDiscoveryPage() {
   const { data: foods, error } = await supabase
@@ -75,6 +76,8 @@ export default async function FoodDiscoveryPage() {
                   </span>
                 )}
               </div>
+
+              <LogMealButton food={food} />
             </div>
           );
         })}
