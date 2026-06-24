@@ -14,7 +14,7 @@ export interface Food {
   active: boolean;
 }
 
-export interface Transaction {
+export interface Expense {
   id: string;
   user_id: string;
   amount: number;

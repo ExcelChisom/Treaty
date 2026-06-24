@@ -19,8 +19,8 @@ CREATE TABLE IF NOT EXISTS foods (
   active BOOLEAN DEFAULT true
 );
 
--- Transactions Table
-CREATE TABLE IF NOT EXISTS transactions (
+-- Expenses Table
+CREATE TABLE IF NOT EXISTS expenses (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   user_id TEXT NOT NULL,
   amount NUMERIC NOT NULL,

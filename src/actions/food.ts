@@ -27,7 +27,7 @@ export async function logMeal(foodId: string, price: number, foodName: string) {
   }
 
   // 2. Log the transaction (expense)
-  const { error: transactionError } = await supabase.from("transactions").insert({
+  const { error: transactionError } = await supabase.from("expenses").insert({
     user_id: userId,
     amount: price,
     category: "Food",
@@ -36,7 +36,7 @@ export async function logMeal(foodId: string, price: number, foodName: string) {
   });
 
   if (transactionError) {
-    console.error("Error inserting into transactions:", transactionError);
+    console.error("Error inserting into expenses:", transactionError);
     throw new Error("Failed to log expense.");
   }
 
