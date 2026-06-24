@@ -35,7 +35,7 @@ export default async function FoodDiscoveryPage() {
         <span className="px-[18px] py-[8px] rounded-[20px] text-[13px] font-medium whitespace-nowrap bg-white/70 border border-[#E2E8F0] text-treaty-text-main">Snacks</span>
       </div>
 
-      <div className="flex flex-col gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {foods?.map((food: Food) => (
           <div 
             key={food.id}

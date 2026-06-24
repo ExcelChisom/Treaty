@@ -198,7 +198,8 @@ export default function FinanceClient({
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-8 px-2 md:px-6 pt-5">
+      <div className="flex flex-col gap-4 w-full max-w-md mx-auto md:max-w-none md:mx-0">
       {/* ── Wallet Balance ── */}
       <div className="text-center py-4">
         <div className="text-[12px] text-treaty-text-muted">Available Balance</div>
@@ -371,7 +372,11 @@ export default function FinanceClient({
         </section>
       )}
 
-      <section aria-label="Recent Transactions" className="mt-2">
+      </div>
+
+      {/* Right Column: Transactions */}
+      <div className="flex flex-col">
+        <section aria-label="Recent Transactions" className="mt-2 md:mt-0">
         <div className="font-semibold text-treaty-text-main mb-2">Recent Transactions</div>
           {allExpenses.length > 0 && (
             <span className="text-xs text-text-muted font-medium">
@@ -397,8 +402,8 @@ export default function FinanceClient({
             ))}
           </div>
         )}
-      </section>
-
+        </section>
+      </div>
     </div>
   );
 }

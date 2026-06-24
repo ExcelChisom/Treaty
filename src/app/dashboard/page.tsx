@@ -18,9 +18,11 @@ export default async function DashboardHome() {
         </div>
       </div>
 
-      <ShreddyCard />
+      <div className="flex justify-center w-full max-w-md mx-auto md:max-w-xl">
+        <ShreddyCard />
+      </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {/* Wallet */}
         <Link href="/finance" className="bg-white/70 backdrop-blur-md rounded-[24px] p-[18px] shadow-[0_4px_16px_rgba(0,0,0,0.04)] border border-white/80 transition-transform active:scale-95">
           <div className="text-[11px] font-semibold text-treaty-text-muted uppercase mb-2 flex items-center gap-1.5">
