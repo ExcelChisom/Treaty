@@ -1,5 +1,6 @@
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 import { Calendar, MapPin, Receipt, Lightbulb } from "lucide-react";
 
 export default async function DashboardPage() {
@@ -70,12 +71,12 @@ export default async function DashboardPage() {
             <span className="text-xs text-gray-400 font-medium">Schedule</span>
           </button>
           
-          <button className="flex flex-col items-center gap-2 group">
+          <Link href="/dashboard/food" className="flex flex-col items-center gap-2 group">
             <div className="w-16 h-16 rounded-2xl bg-[#FDC400]/20 flex items-center justify-center text-[#FDC400] group-active:scale-95 transition-transform">
               <MapPin size={24} />
             </div>
             <span className="text-xs text-gray-400 font-medium">Hotspots</span>
-          </button>
+          </Link>
           
           <button className="flex flex-col items-center gap-2 group">
             <div className="w-16 h-16 rounded-2xl bg-[#FF6B68]/20 flex items-center justify-center text-[#FF6B68] group-active:scale-95 transition-transform">

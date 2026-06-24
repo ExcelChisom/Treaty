@@ -2,19 +2,9 @@
 
 import { useState, useTransition, useMemo } from "react";
 import { logMeal, type MealType } from "../actions";
+import { type Food } from "@/types/database";
 
 // ── Types ──────────────────────────────────────────────────────────────────
-
-interface Food {
-  id: string;
-  name: string;
-  vendor: string;
-  calories: number;
-  protein_g: number;
-  carbs_g: number;
-  fat_g: number;
-  price_naira: number;
-}
 
 interface MealLog {
   id: string;
@@ -115,9 +105,9 @@ export default function FoodClient({
         name: selectedFood.name,
         meal_type: selectedMealType,
         calories: selectedFood.calories,
-        protein_g: selectedFood.protein_g,
-        carbs_g: selectedFood.carbs_g,
-        fat_g: selectedFood.fat_g,
+        protein: selectedFood.protein,
+        carbs: selectedFood.carbs,
+        fats: selectedFood.fats,
       });
 
       if (!result.success) {
@@ -263,7 +253,7 @@ export default function FoodClient({
                   className="text-xs font-black"
                   style={{ color: "var(--treaty-green)" }}
                 >
-                  ₦{food.price_naira.toLocaleString("en-NG")}
+                  ₦{food.price?.toLocaleString("en-NG")}
                 </span>
               </div>
             </button>
@@ -304,9 +294,9 @@ export default function FoodClient({
               {/* Macros */}
               <div className="grid grid-cols-3 gap-2 mb-4">
                 {[
-                  { label: "Protein", value: selectedFood.protein_g, unit: "g", color: "#38bdf8" },
-                  { label: "Carbs",   value: selectedFood.carbs_g,   unit: "g", color: "var(--treaty-orange)" },
-                  { label: "Fat",     value: selectedFood.fat_g,     unit: "g", color: "var(--treaty-purple)" },
+                  { label: "Protein", value: selectedFood.protein, unit: "g", color: "#38bdf8" },
+                  { label: "Carbs",   value: selectedFood.carbs,   unit: "g", color: "var(--treaty-orange)" },
+                  { label: "Fat",     value: selectedFood.fats,     unit: "g", color: "var(--treaty-purple)" },
                 ].map((m) => (
                   <div
                     key={m.label}

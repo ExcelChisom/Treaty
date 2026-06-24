@@ -17,8 +17,8 @@ async function fetchFoodData(userId: string) {
   const [foodsResult, logsResult] = await Promise.all([
     supabase
       .from("foods")
-      .select("id, name, vendor, calories, protein_g, carbs_g, fat_g, price_naira")
-      .eq("is_active", true)
+      .select("id, name, vendor, location, category, price, calories, protein, carbs, fats, budget_tier, fitness_tag, active")
+      .eq("active", true)
       .order("vendor")
       .order("name"),
     supabase

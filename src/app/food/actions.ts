@@ -11,9 +11,9 @@ export interface LogMealPayload {
   name: string;
   meal_type: MealType;
   calories: number;
-  protein_g: number;
-  carbs_g: number;
-  fat_g: number;
+  protein: number;
+  carbs: number;
+  fats: number;
 }
 
 export interface ActionResult {
@@ -38,9 +38,9 @@ export async function logMeal(payload: LogMealPayload): Promise<ActionResult> {
       name: payload.name.trim(),
       meal_type: payload.meal_type,
       calories: Math.round(payload.calories),
-      protein_g: payload.protein_g ?? 0,
-      carbs_g: payload.carbs_g ?? 0,
-      fat_g: payload.fat_g ?? 0,
+      protein_g: payload.protein ?? 0,
+      carbs_g: payload.carbs ?? 0,
+      fat_g: payload.fats ?? 0,
     });
 
     if (error) {
