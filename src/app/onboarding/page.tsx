@@ -2,10 +2,13 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Sparkles, MapPin, PieChart } from "lucide-react";
+import { Sparkles, MapPin, PieChart, Loader2 } from "lucide-react";
+import { completeUserOnboarding } from "@/actions/user";
 
 export default function OnboardingPage() {
   const [step, setStep] = useState(1);
+  const [nickname, setNickname] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
   const router = useRouter();
 
   const nextStep = () => setStep((prev) => Math.min(prev + 1, 8));
@@ -32,7 +35,13 @@ export default function OnboardingPage() {
           <p className="text-gray-400 mb-6">Choose a nickname that's unique to you.</p>
           <div className="mb-8">
             <label className="text-sm font-semibold text-gray-400 ml-1 mb-2 block">Nickname</label>
-            <input type="text" placeholder="Carlin" className="bg-[#1E293B] border border-[#334155] rounded-xl px-4 py-4 w-full text-white outline-none focus:border-[#00C853] transition-colors" />
+            <input 
+              type="text" 
+              placeholder="Carlin" 
+              value={nickname}
+              onChange={(e) => setNickname(e.target.value)}
+              className="bg-[#1E293B] border border-[#334155] rounded-xl px-4 py-4 w-full text-white outline-none focus:border-[#00C853] transition-colors" 
+            />
           </div>
           
           <div className="grid grid-cols-3 gap-4 mb-auto">
@@ -216,8 +225,21 @@ export default function OnboardingPage() {
           </div>
           <h2 className="text-3xl font-bold leading-tight mb-4">You're all set!</h2>
           <p className="text-gray-400 text-sm px-6">Enjoy your premium experience.</p>
-          <button onClick={() => router.push('/dashboard')} className="mt-auto bg-[#00C853] text-black w-full py-4 rounded-full font-bold text-lg active:scale-95 transition-transform">
-            Go to Dashboard
+          <button 
+            onClick={async () => {
+              setIsSaving(true);
+              try {
+                await completeUserOnboarding(nickname);
+                router.push('/dashboard');
+              } catch (error) {
+                console.error("Failed to save onboarding data:", error);
+                setIsSaving(false);
+              }
+            }} 
+            disabled={isSaving}
+            className="mt-auto bg-[#00C853] text-black w-full py-4 rounded-full font-bold text-lg active:scale-95 transition-transform flex items-center justify-center disabled:opacity-50"
+          >
+            {isSaving ? <Loader2 className="animate-spin" /> : "Go to Dashboard"}
           </button>
         </div>
       )}

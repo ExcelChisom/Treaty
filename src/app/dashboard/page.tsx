@@ -1,4 +1,5 @@
 import { auth, currentUser } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 import { Calendar, MapPin, Receipt, Lightbulb } from "lucide-react";
 
 export default async function DashboardPage() {
@@ -7,11 +8,18 @@ export default async function DashboardPage() {
     currentUser(),
   ]);
 
+  if (user && !user.publicMetadata?.onboardingComplete) {
+    redirect('/onboarding');
+  }
+
+  const isPremium = user?.publicMetadata?.isPremium === true;
+
   const nickname =
+    (user?.publicMetadata?.nickname as string) ||
     user?.firstName?.trim() ||
     user?.username?.trim() ||
     user?.emailAddresses?.[0]?.emailAddress?.split("@")?.[0] ||
-    "Carlin!";
+    "Student";
 
   return (
     <main className="max-w-lg mx-auto w-full px-4 pt-6 pb-24 flex flex-col gap-6">
@@ -86,7 +94,7 @@ export default async function DashboardPage() {
       </section>
 
       {/* 5. Shreddy's Smart Tip */}
-      <section className="animate-fade-in-up delay-200 mt-2">
+      <section className="animate-fade-in-up delay-200 mt-2 relative">
         <div className="bg-[#1E293B] border border-[#00C853]/30 rounded-3xl p-4 flex flex-row items-center gap-4">
           <div className="w-10 h-10 rounded-full bg-[#00C853]/20 flex items-center justify-center text-xl shrink-0">
             🦖
@@ -98,6 +106,20 @@ export default async function DashboardPage() {
             </p>
           </div>
         </div>
+
+        {/* Lock Overlay if not premium */}
+        {!isPremium && (
+          <div className="absolute inset-0 rounded-3xl flex flex-col items-center justify-center gap-2 transition-opacity duration-200 bg-[#0F172A]/90 p-4">
+            <div className="bg-white/10 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <rect x="3" y="9" width="14" height="10" rx="2" fill="white" fillOpacity="0.9" />
+                <path d="M6.5 9V6.5C6.5 4.57 8.07 3 10 3C11.93 3 13.5 4.57 13.5 6.5V9" stroke="white" strokeWidth="1.8" strokeLinecap="round" />
+                <circle cx="10" cy="14" r="1.5" fill="#0F172A" />
+              </svg>
+              Upgrade to unlock
+            </div>
+          </div>
+        )}
       </section>
 
       {/* 6. Recent Expenses & Next Class Lists */}
